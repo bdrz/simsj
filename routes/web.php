@@ -59,6 +59,19 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/getunit', 'PenjualanController@getunit')->name('penjualan.getunit');
             Route::get('/getmember', 'PenjualanController@getmember')->name('penjualan.getmember');
             Route::post('/proses', 'PenjualanController@proses')->name('penjualan.proses');
+            Route::get('/tambah_lama', function(){ return view('dashboard.under'); });
+        });
+        Route::prefix('pembayaran')->group(function () {
+            Route::get('/', function(){ return view('dashboard.under'); });
+        });
+        Route::prefix('laporan')->group(function () {
+            Route::get('/', function(){ return view('dashboard.under'); });
+        });
+        Route::prefix('profile')->group(function () {
+            Route::get('/', function(){ return view('dashboard.under'); });
+        });
+        Route::prefix('settings')->group(function () {
+            Route::get('/', function(){ return view('dashboard.under'); });
         });
         Route::prefix('log')->group(function () {
             Route::get('/', 'LogController@index')->name('log.index');

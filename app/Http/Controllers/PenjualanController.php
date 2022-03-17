@@ -14,7 +14,8 @@ class PenjualanController extends Controller
         $member = Member::all();
         $lokasi = Lokasi::all();
         $unit = Unit::all();
-        return view('dashboard.penjualan.tambah', compact('member','lokasi'));
+       // return view('dashboard.penjualan.tambah', compact('member','lokasi'));
+        return view('dashboard.under');
     }
     public function getunit(Request $request)
     {

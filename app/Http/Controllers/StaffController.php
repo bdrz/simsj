@@ -28,13 +28,27 @@ class StaffController extends Controller
         'email' => 'required|unique:users,email',
         ]);
 
-        $insert = new User;
+      /*   $insert = new User;
         $insert->name = $request->name;
         $insert->email = $request->email;
         $insert->menuroles = $request->menuroles;
         $insert->path = $path;
         $insert->password = Hash::make($request->password);
         $insert->save();
+ */
+        $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'path' => $path,
+        'password' => Hash::make($request->password),
+        ]);
+        $user->assignRole('staff');
+
+
+        $update = User::find($user->id);
+        $update->path=$path;
+        $update->save();
+     /*    return $user; */
 
         return redirect('/staff')->with(['message' => 'Akun berhasil ditambahkan']);
     }

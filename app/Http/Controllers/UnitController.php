@@ -12,7 +12,7 @@ class UnitController extends Controller
     public function index()
     {
         $lokasi = Lokasi::all();
-        $unit = Unit::all();
+        $unit = Unit::orderby('lokasi_id')->get();
         return view('dashboard.unit.index', compact('lokasi','unit'));
     }
     public function add(Request $request)

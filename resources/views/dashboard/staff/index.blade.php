@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="card">
-          <div class="card-header"><h4>Log Data</h4></div>
+          <div class="card-header"><h4>Akun</h4></div>
             <div class="card-body">
               @if(Session::has('message'))
                     <div class="row">
@@ -80,16 +80,7 @@
       <form action="{{ route('staff.add') }}" method="POST"
       oninput='re_password.setCustomValidity(password.value != re_password.value ? "Password tidak sama" : "")'>
         @csrf
-            <div class="form-group">
-              <label>Jabatan</label>
-                <select class="form-control" name="menuroles" value="" id="menuroles">
-                  <option value="manager">MANAGER</option>
-                  <option value="user">STAFF</option>
-                </select>
-                @error('menuroles')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
+      
             <div class="form-group">
                 <label>Nama Akun</label>
                 <input type="text" placeholder="Nama Akun" name="name" class="form-control" value="{{old('name')}}" required>
