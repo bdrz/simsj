@@ -4,6 +4,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 @endsection
 
 @section('content')
@@ -41,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Lokasi</label>
-                                <select class="form-control select2" name="lokasi_id" id="lokasi">
+                                <select class="form-control" name="lokasi_id" id="lokasi">
                                     <option value="" disabled selected>Pilih Lokasi</option>
                                     @foreach ($lokasi as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -60,62 +61,58 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Leader</label>
+                                <select class="form-control select2" name="leader_id" id="leader">
+                                    <option value="" disabled selected>Pilih Leader</option>
+                                    @foreach ($leader as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('lokasi_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Marketing</label>
+                                <select class="form-control select2" name="marketing_id" id="marketing">
+                                    <option value="" disabled selected>Pilih Marketing</option>
+                                </select>
+                                @error('marketing_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <hr>
-                            
+                             <div class="form-group">
+                                <label>Harga Unit</label>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rp.</span>
+                                <input type="text" class="form-control"  placeholder="Harga Unit" name="harga" class="form-control uang" value="" id="harga" class="harga" >
+                                </div>
+                                @error('harga')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label>Metode Pembelian</label>
                                 <select class="form-control mb-1" name="metode_pembelian" id="metode_pembelian">
                                     <option value="" disabled selected>Pilih Metode Pembelian</option>
-                                    <option value="CASH">CASH</option>
-                                    <option value="INHOUSE">INHOUSE</option>
-                                </select>
-                                @error('unit_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                                <select class="form-control" name="metode_pembayaran" id="metode_pembayaran">
-                                    <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                                    <option value="CASH">CASH</option>
-                                    <option value="INHOUSE">INHOUSE</option>
+                                     @foreach ($metode as $item)
+                                    <option value="{{ $item->id }}">{{ $item->metode }}</option>
+                                    @endforeach
                                 </select>
                                 @error('unit_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Harga Unit</label>
-                                <input type="text" {{-- data-type='currency' --}} placeholder="Harga Unit" name="harga" class="form-control" value="" id="harga">
-                                @error('harga')
+                                <label>Tanggal Pembelian</label>
+                                <input type="date" name="tgl_pembelian" class="form-control" value="">
+                                @error('tgl_pembelian')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label>dp</label>
-                                <input type="text" {{-- data-type='currency' --}} placeholder="dp" name="dp" class="form-control" value="" id="dp">
-                                @error('dp')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Harga Unit</label>
-                                <input type="text" data-type='currency' placeholder="Harga Unit" name="harga" class="form-control" value="" id="cicilan1">
-                                @error('harga')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Harga Unit</label>
-                                <input type="text" {{-- data-type='currency' --}} placeholder="Harga Unit" name="harga" class="form-control" value="" id="cicilan2">
-                                @error('harga')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Harga Unit</label>
-                                <input type="text" {{-- data-type='currency' --}} placeholder="Harga Unit" name="harga" class="form-control" value="" id="cicilan3">
-                                @error('harga')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            
                         </div>
                         <div class="col-6">
                             <h5>Informasi User</h5>
@@ -137,6 +134,13 @@
                             </tr>
                         </table>
                         
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Harga Unit</td>
+                                <td><h3 class="textfield_label" id="res">$0.00</h3></td>
+                            </tr>
+                        </table>
                         </div>
                             
                     </div>
@@ -155,21 +159,32 @@
   </div>
 </div>
 
+
 @endsection
 
 @section('javascript')
 
 <script>
-    
+
+const number = 123456.789;
+
+// another example 
+console.log(new Intl.NumberFormat('ja-JP',  {
+  style: 'currency',
+  currency: 'IDR',
+}).format(number));
+
     $('#harga').keyup(function(){
     var harga = $(this).val();
     var dp = $("#dp").val();
 
+        $("#harga_show").val(harga);
+
         $("#cicilan1").val((harga-dp)/3);
         $("#cicilan2").val((harga-dp)/3);
-        $("#cicilan3").val((harga-dp)/3);
-    ;  
+        $("#cicilan3").val((harga-dp)/3); 
    });
+   
     $('#dp').keyup(function(){
     var dp = $(this).val();
     var harga = $("#harga").val();
@@ -204,6 +219,36 @@
         $("#unit").empty();
     }      
    });
+
+    $('#leader').change(function(){
+    var id = $(this).val();    
+    if(id){
+        $.ajax({
+           type:"GET",
+           url:"/penjualan/getmarketing?id="+id,
+           dataType: 'JSON',
+           success:function(res){               
+            if(res){
+                $("#marketing").empty();
+                $.each(res,function(nama,id){
+                    $("#marketing").append('<option value="'+id+'">'+nama+'</option>');
+                });
+            }else{
+               $("#marketing").empty();
+            }
+           }
+        });
+    }else{
+        $("#marketing").empty();
+    }      
+   });
+
+
+
+
+
+
+
 
     $('#member').change(function(){
     var id = $(this).val();
@@ -240,7 +285,7 @@ $(document).ready(function() {
     // Jquery Dependency
 
 $("input[data-type='currency']").on({
-    keyup: function() {
+    ready: function() {
       formatCurrency($(this));
     },
     blur: function() { 

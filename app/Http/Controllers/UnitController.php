@@ -21,14 +21,14 @@ class UnitController extends Controller
         'lokasi_id' => 'required',
         'nama' => 'required',
         'jenis' => 'required',
-        'tipe' => 'required',
         ]);
 
         $insert = new Unit();
         $insert->lokasi_id = $request->lokasi_id;
         $insert->nama = $request->nama;
         $insert->jenis = $request->jenis;
-        $insert->tipe = $request->tipe;
+        $insert->lb = $request->lb;
+        $insert->lt = $request->lt;
         $insert->user_id = auth()->user()->id;
         $insert->save();
 
@@ -45,14 +45,14 @@ class UnitController extends Controller
         'lokasi_id' => 'required',
         'nama' => 'required',
         'jenis' => 'required',
-        'tipe' => 'required',
         ]);
 
         $update = Unit::find($request->id);
         $update->lokasi_id = $request->lokasi_id;
         $update->nama = $request->nama;
         $update->jenis = $request->jenis;
-        $update->tipe = $request->tipe;
+        $update->lb = $request->lb;
+        $update->lt = $request->lt;
         $update->user_id = auth()->user()->id;
         $update->save();
 

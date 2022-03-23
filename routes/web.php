@@ -57,6 +57,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::prefix('penjualan')->group(function () {
             Route::get('/tambah', 'PenjualanController@tambah')->name('penjualan.tambah');
             Route::get('/getunit', 'PenjualanController@getunit')->name('penjualan.getunit');
+            Route::get('/getmarketing', 'PenjualanController@getmarketing')->name('penjualan.getmarketing');
             Route::get('/getmember', 'PenjualanController@getmember')->name('penjualan.getmember');
             Route::post('/proses', 'PenjualanController@proses')->name('penjualan.proses');
             Route::get('/tambah_lama', function(){ return view('dashboard.under'); });

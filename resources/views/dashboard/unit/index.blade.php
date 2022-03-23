@@ -30,7 +30,8 @@
                     <th data-halign="center" data-width="200">Lokasi</th>
                     <th data-halign="center" data-width="100">Unit</th>
                     <th data-halign="center" data-width="150">Jenis</th>
-                    <th data-halign="center" data-width="150">Tipe</th>
+                    <th data-halign="center" data-width="150">LB (Type)</th>
+                    <th data-halign="center" data-width="150">LT (m<sup>2</sup>)</th>
                     <th data-halign="center" data-width="200">Status</th>
                     <th data-halign="center" data-width="140">Action</th>
                     </tr>
@@ -43,10 +44,11 @@
                             <td>{{ $item->lokasi->nama }}</td>
                             <td class="text-center">{{ $item->nama }}</td>
                             <td class="text-center">{{ $item->jenis }}</td>
-                            <td class="text-center">{{ $item->tipe }}</td>
+                            <td class="text-center">{{ $item->lb }}</td>
+                            <td class="text-center">{{ $item->lt }}</td>
                             <td></td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm edit_btn" href="#" data-toggle="modal" data-target=".edit" data-nama="{{ $item->nama }}" data-id="{{ $item->id }}" data-jenis="{{ $item->jenis }}" data-lokasi_id="{{ $item->lokasi_id }}" data-tipe="{{ $item->tipe }}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-primary btn-sm edit_btn" href="#" data-toggle="modal" data-target=".edit" data-nama="{{ $item->nama }}" data-id="{{ $item->id }}" data-jenis="{{ $item->jenis }}" data-lokasi_id="{{ $item->lokasi_id }}" data-lb="{{ $item->lb }}" data-lt="{{ $item->lt }}"><i class="fa fa-edit"></i> Edit</a>
                                 <a class="btn btn-danger btn-sm delete_btn" href="#" data-toggle="modal" data-target=".delete" data-nama="{{ $item->nama }}" data-id="{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</a>
                             </td>
                          </tr>
@@ -135,16 +137,16 @@
                 @enderror
             </div>
             <div class="form-group">
-              <label>Tipe</label>
-                <select class="form-control" name="tipe" >
-                  <option value=""></option>
-                  <option value="TIPE 21/24">TIPE 21/24</option>
-                  <option value="TIPE 36">TIPE 36</option>
-                  <option value="TIPE 45">TIPE 45</option>
-                  <option value="TIPE 60">TIPE 60</option>
-                  <option value="TIPE 70">TIPE 70</option>
-                </select>
-                @error('tipe')
+              <label>LB (Type)</label>
+                 <input type="text" placeholder="LB" name="lb" class="form-control" value="">
+                @error('lb')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label>LT (m<sup>2</sup>)</label>
+                 <input type="text" placeholder="LT" name="lt" class="form-control" value="">
+                @error('lt')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
@@ -202,15 +204,16 @@
                 @enderror
             </div>
             <div class="form-group">
-              <label>Tipe</label>
-                <select class="form-control" name="tipe" value="" id="tipe">
-                  <option value="TIPE 21/24">TIPE 21/24</option>
-                  <option value="TIPE 36">TIPE 36</option>
-                  <option value="TIPE 45">TIPE 45</option>
-                  <option value="TIPE 60">TIPE 60</option>
-                  <option value="TIPE 70">TIPE 70</option>
-                </select>
-                @error('tipe')
+              <label>LB (Type)</label>
+                 <input type="text" placeholder="Unit" name="lb" class="form-control" value="" id="lb">
+                @error('lb')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+              <label>LT (m<sup>2</sup>)</label>
+                 <input type="text" placeholder="Unit" name="lb" class="form-control" value="" id="lt">
+                @error('lb')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
@@ -245,7 +248,8 @@ $(document).on("click", ".edit_btn", function () {
      $("#lokasi_id").val(data.lokasi_id);
      $("#nama_edit").val(data.nama);
      $("#jenis").val(data.jenis);
-     $("#tipe").val(data.tipe);
+     $("#lb").val(data.lb);
+     $("#lt").val(data.lt);
 });
 </script>
  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
