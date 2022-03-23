@@ -19,8 +19,8 @@ class PenjualanController extends Controller
         $unit = Unit::all();
         $leader = Leader::all();
         $metode = Metode::all();
-        return view('dashboard.penjualan.tambah', compact('member','lokasi','leader','metode'));
-        //return view('dashboard.under');
+        //return view('dashboard.penjualan.tambah', compact('member','lokasi','leader','metode'));
+        return view('dashboard.under');
     }
     public function getunit(Request $request)
     {
