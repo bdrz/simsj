@@ -1,0 +1,1 @@
+mysql -u root -p simsj < simsj_menus.sql

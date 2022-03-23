@@ -1,0 +1,1 @@
+mysqldump -u root -p simsj menus > simsj_menus.sql
