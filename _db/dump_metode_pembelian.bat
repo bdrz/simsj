@@ -1,0 +1,1 @@
+mysqldump -u root -p simsj metode_pembelian > simsj_metode_pembelian.sql
