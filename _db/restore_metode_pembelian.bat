@@ -1,1 +1,0 @@
-mysql -u root -p simsj < simsj_metode_pembelian.sql
